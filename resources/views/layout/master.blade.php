@@ -30,12 +30,12 @@
  
   <script data-ad-client="ca-pub-4152597108794624" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HFTS18C7Z3"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2PVSQP7PV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-HFTS18C7Z3');
+  gtag('config', 'G-P2PVSQP7PV');
 </script>
 <!--End--->
 </head>
@@ -52,9 +52,16 @@
             <a class="nav-link" href="{{ url('/') }}">Home
               <span class="sr-only">(current)</span>
             </a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ url('contact') }}">Tech</a>
+          </li>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('about') }}">About</a>
+            <a class="nav-link" href="#">Entertainment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Lifestyle</a>
           </li>
         <!--/*  <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
@@ -81,23 +88,53 @@
       </div>
     </div>
   </nav>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-4152597108794624"
-     data-ad-slot="6887541390"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
   @yield('content')
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; jswebsolutions.in&nbsp;<?php date('Y') ?>&nbsp;<a href="<?php echo url('privacy-policy') ?>">Privacy Policy</a>&nbsp;<a href="<?php echo url('term-and-condition') ?>">Term and condition </a></p>
-    </div>
-    <!-- /.container -->
-  </footer>
+  <footer class="section footer-classic context-dark bg-image bg-green">
+        <div class="container">
+          <div class="row row-30" style="margin-top:200px;">
+            <div class="col-md-4 col-xl-5">
+              <div class="pr-xl-4">
+                <p>We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.</p>
+                <!-- Rights-->
+                <p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Waves</span><span>. </span><span>All Rights Reserved.</span></p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h5>Contacts</h5>
+              <dl class="contact-list">
+                <dt>Address:</dt>
+                <dd>798 South Park Avenue, Jaipur, Raj</dd>
+              </dl>
+              <dl class="contact-list">
+                <dt>email:</dt>
+                <dd><a href="mailto:#">dkstudioin@gmail.com</a></dd>
+              </dl>
+              <dl class="contact-list">
+                <dt>phones:</dt>
+                <dd><a href="tel:#">https://karosearch.com</a> <span>or</span> <a href="tel:#">https://karosearch.com</a>
+                </dd>
+              </dl>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <h5>Links</h5>
+              <ul class="nav-list">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacts</a></li>
+                <li><a href="#">Pricing</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row no-gutters social-container">
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-facebook"></span><span>Facebook</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-instagram"></span><span>instagram</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-twitter"></span><span>twitter</span></a></div>
+          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-youtube-play"></span><span>google</span></a></div>
+        </div>
+      </footer>
   <script src="<?php echo url('public/front_webu/vendor/jquery/jquery.min.js'); ?>"></script>
   <script src="<?php echo url('public/front_webu/vendor/bootstrap/js/bootstrap.min.js') ?>">
   </script>

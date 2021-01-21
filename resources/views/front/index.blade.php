@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('content')
  <!-- Page Content -->
-  <div class="container">
+  <div class="container" id="postSectopn">
     <div class="row">
       <!-- Blog Entries Column -->
       <div class="col-md-8 my-4">
@@ -15,7 +15,7 @@
             <div class="row">
               @if(!empty($image))
                 <div class="col-sm-6">
-                  <img class="card-img-top" src="{{ $post->image_url }}" alt="Card image cap">
+                  <img class="card-img-top" src='{{ asset("public/storage/$post->image") }}' alt="Card image cap">
                 </div>
               @endif 
              <div class="col-sm-<?php if(!empty($image)) echo 6; else echo 12; ?>">
@@ -69,19 +69,6 @@
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
         <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Change Language </h5>
-          <div class="card-body">
-            <div class="input-group">
-                 <div id="google_translate_element"></div>
-                 <script type="text/javascript">
-                    function googleTranslateElementInit() {
-                      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-                    }
-                    </script>
-            </div>
-          </div>
-        </div>
         <div class="card my-4">
           <h5 class="card-header">Search</h5>
           <div class="card-body">
