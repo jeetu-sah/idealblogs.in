@@ -12,16 +12,13 @@ class LoginController extends Controller{
 
 	
 	public function login(){
-		if(Auth::check()){
-		    return redirect('js_admin');
-		  }
 	   return view('login');
+	}
+	public function loginnew(){
+	   return view('adminPages.login');
 	}
 	
 	public function sign_up(){
-		if(Auth::check()){
-		    return redirect('js_admin');
-		  }
 	  return view('sign_up');
 	}
 	

@@ -2,29 +2,44 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Page;
-use App\Blogs;
+use App\Blogs , App\User;
 use Mail;
 use App\Mail\ContactMail;
 use Auth;
+use sHelper;
+use DB;
 
 class Dashboard extends Controller{
 	
    public function index($page = "home" , $p1 = NULL){
-       $data['title'] = "sayari , kavita , daily news , daily uses , motivational quotes , motivational ";
-       
+	   //echo $page;exit;
+	   $data['title'] = "sayari , kavita , daily news , daily uses , motivational quotes , motivational ";
+	    if($page == "edit-post"){
+			$data['pageList'] = Page::where([['private_status' , '=' , NULL]])->get();
+		     $data['post'] = DB::table('blogs')->where([['title_slug' , '=' , $p1]])->first();
+		}
+	   	if($page == "add-page" || $page == "edit-page"){
+			$data['pageList'] = sHelper::parentPages();
+			if(!empty($p1)){
+				$data['page_content'] = DB::table('pages')->where([['id','=',$p1]])->first();
+				// echo "<pre>";
+				// print_r($data['page_content']);exit;
+			}
+		}
+       if($page == "add-post"){
+		  $data['pageList'] = Page::where([['private_status' , '=' , NULL]])->get();
+		  } 
        if($page == "home"){
 		   $data['post_list'] = Blogs::where([['users_id' , '=' , Auth::user()->id]])->get();
 		} 
 	   if($page == "create_story"){
 	      $data['pageList'] = Page::where([['private_status' , '=' , NULL]])->get();
-	      //echo "<pre>";
-	      //print_r($data['pageList']);exit;
 	   }	
 		  
-        if(!view()->exists("dashboard.$page"))
-          return view("404")->with($data);
-        else  
-         return view("dashboard.$page")->with($data);
+		if(!view()->exists("admin.$page"))
+			return view("404")->with($data);
+		else  
+			return view("admin.$page")->with($data);
 	}
 	
 	
@@ -39,6 +54,8 @@ class Dashboard extends Controller{
 	}
 	
 	
+	
+
 	public function post($post_title){
 	   if(empty($post_title)){ return redirect()->back(); } 
 	   $data['category'] = Page::where([['private_status' , '=', NULL]])->get();
@@ -70,6 +87,128 @@ class Dashboard extends Controller{
         else  
          return view("front.post")->with($data);
 	}
+
+
+
+	public function postList(Request $request){
+		$limit = request()->input('length');
+		$start = request()->input('start');
+		$columns = array(0=>'id' , 1=>'f_name', 2=>'mobile', 3=>'name');
+		$dir = $request->input('order.0.dir');
+		if($dir == "asc"){ $dir = "ASC"; }
+		else{ $dir = "DESC"; }
+		$order = $columns[$request->input('order.0.column')];
+		$postQuery = Blogs::where([['users_id','=',Auth::user()->id]]);
+		$totalRecord = $postQuery->count();
+		$posts = $postQuery->get();
+		$partners_lists = [];
+		if($posts->count() > 0){
+			$i = 1;
+			foreach($posts as $post){
+				$change_credential = NULL;	
+				$delete_btn =  "<a href='javascript::void()' data-partnerid='".$post->id."' data-toggle='tooltip' title='Add category' class='btn btn-danger remove_partner' style='margin-right: 5px;'><i class='fas fa-trash'></i></a>&nbsp;";
+				$edit_btn = '<a href="'.url("dashboard/edit-post/".$post->id).'" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
+				<i class="fas fa-edit"></i> 
+				</a>';	
+				$postArr = [];
+				$postArr['sn'] = $i;
+				$postArr['title'] = $post->title;
+				$postArr['action'] = $delete_btn.' '.$edit_btn." ".$change_credential;
+				$i++;
+				$partners_lists[] = $postArr;
+			}
+		}
+
+		$json_data = array(
+			"draw"            => intval(request()->input('draw')),  
+			"recordsTotal"    => intval($totalRecord),  
+			"recordsFiltered" => intval($totalRecord), 
+			"data"            => $partners_lists   
+		);
+        return json_encode($json_data); exit;
+	}
+
+	public function pageList(Request $request){
+		$limit = request()->input('length');
+		$start = request()->input('start');
+		$columns = array(0=>'id' , 1=>'f_name', 2=>'mobile', 3=>'name');
+		$dir = $request->input('order.0.dir');
+		if($dir == "asc"){ $dir = "ASC"; }
+		else{ $dir = "DESC"; }
+		$order = $columns[$request->input('order.0.column')];
+		$pageQuery = Page::query();
+		$totalRecord = $pageQuery->count();
+		$pages = $pageQuery->skip($start)->take($limit)->get();
+		$partners_lists = [];
+		if($pages->count() > 0){
+			$i = 1;
+			foreach($pages as $page){
+				$change_credential = NULL;	
+				$delete_btn =  "<a href='javascript::void()' data-partnerid='".$page->id."' data-toggle='tooltip' title='Add category' class='btn btn-danger remove_partner' style='margin-right: 5px;'><i class='fas fa-trash'></i></a>&nbsp;";
+				$edit_btn = '<a href="'.url("dashboard/edit-page/".$page->id).'" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
+				<i class="fas fa-edit"></i> 
+				</a>';	
+				$postArr = [];
+				$postArr['sn'] = $i;
+				$postArr['title'] = $page->page_name;
+				$postArr['action'] = $delete_btn.' '.$edit_btn." ".$change_credential;
+				$i++;
+				$partners_lists[] = $postArr;
+			}
+		}
+
+		$json_data = array(
+			"draw"            => intval(request()->input('draw')),  
+			"recordsTotal"    => intval($totalRecord),  
+			"recordsFiltered" => intval($totalRecord), 
+			"data"            => $partners_lists   
+		);
+        return json_encode($json_data); exit;
+	}
+
+	/*save post */
+	public function savePost(Request $request){
+		$image_name = NULL;
+		  if(!empty($request->image)){
+			  $image_name = $this->upload_single_file($request);
+			  if($image_name == 100){
+				  echo "Plase check your image extension .";exit;
+				}
+			}
+		  $save_response = Blogs::save_post($request, $image_name);
+		  if($save_response != FALSE){
+		      if($save_response){
+				 $location = url("public/pages/");
+				 //$myFile = $location.$data['success'].".html";
+				 $myFile = "public/pages/".$save_response->id.".html";
+				 $fh = fopen($myFile,'w');
+				 $stringData = "";
+				 fwrite($fh, $stringData);
+				 fclose($fh);
+			   }
+			 return redirect()->back()->with(['msg'=>'<div class="notice notice-success"><strong> Info , </strong> Post successfully upload  !!!. </div>']);
+			}
+		  else{
+		      return redirect()->back()->with(['msg'=>'<div class="notice notice-danger"><strong> Wrong , </strong>  Something went wrong please try again  !!!. </div>']);
+			 } 
+	}
+	/*End*/
+
+	public function savePage(Request $request){
+		$page_slug_name = sHelper::slug($request->page_name);
+		$save_response = DB::table('pages')->insert(['parent_id'=>$request->parent_id,'page_slug'=>$page_slug_name , 'page_title'=>$request->page_title , 'page_name'=>$request->page_name , 'priority'=>1 , 'status'=>'A' ,
+		'meta_key_word'=>$request->meta_keyword, 
+		'meta_description'=>$request->meta_description, 'created_at'=>date('Y-m-d H:i') , 'updated_at'=>date('Y-m-d H:i')]);
+		if($save_response){
+			return redirect()->back()->with(['msg'=>'<div class="notice notice-success">
+									<strong>Success </strong> Page create Successful !!!.</div>.']);
+		}
+		else{
+			return redirect()->back()->with(['msg'=>'<div class="notice notice-danger">
+									<strong>Wrong </strong> Something went wrong , please try again  !!!.</div>.']);
+		}	
+	}	
+	
 }
 
 
