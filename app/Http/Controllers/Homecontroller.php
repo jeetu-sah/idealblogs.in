@@ -10,7 +10,7 @@ use sHelper;
 class Homecontroller extends Controller{
 	
    public function index($page = "home" , $p1 = NULL){
-      
+	    
 		$data['pages_detail'] = Page::where([['page_slug','=', $page]])->first();
 		$data['category'] = Page::where([['private_status' , '=', NULL]])->get();
 		if($page != "home"){
@@ -43,6 +43,17 @@ class Homecontroller extends Controller{
          return view("front.$page")->with($data);
 	}
 	
+
+	public function aboutUs(){
+		//echo "yes";exit;
+		$data['head_title'] = 'About Us | idealblogs.in';
+		return view("front.about")->with($data);
+	}
+
+	public function dmcaPolicy(){
+		$data['head_title'] = 'DMCA Policy | idealblogs.in';
+		return view("front.dmca-policy")->with($data);
+	}
 	
 	public function contact_send(Request $request){
 	    $data =  array('name'=>$request->name,
