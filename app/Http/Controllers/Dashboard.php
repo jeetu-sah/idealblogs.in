@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Page;
-use App\Blogs , App\User;
+use App\Blogs , App\User , App\SeoModel;
 use Mail;
 use App\Mail\ContactMail;
 use Auth;
@@ -14,27 +14,31 @@ class Dashboard extends Controller{
    public function index($page = "home" , $p1 = NULL){
 	   //echo $page;exit;
 	   $data['title'] = "sayari , kavita , daily news , daily uses , motivational quotes , motivational ";
-	    if($page == "edit-post"){
-			$data['pageList'] = Page::where([['private_status' , '=' , NULL]])->get();
-		     $data['post'] = DB::table('blogs')->where([['title_slug' , '=' , $p1]])->first();
-		}
 	   	if($page == "add-page" || $page == "edit-page"){
 			$data['pageList'] = sHelper::parentPages();
 			if(!empty($p1)){
 				$data['page_content'] = DB::table('pages')->where([['id','=',$p1]])->first();
-				// echo "<pre>";
-				// print_r($data['page_content']);exit;
 			}
 		}
-       if($page == "add-post"){
-		  $data['pageList'] = Page::where([['private_status' , '=' , NULL]])->get();
-		  } 
-       if($page == "home"){
+        if($page == "add-post" || $page == "edit-post"){
+			$data['post'] = NULL;
+		    $data['pageList'] = sHelper::parentPages();
+		   	if(!empty($p1)){
+			   $data['post'] = DB::table('blogs')->where([['id','=',$p1]])->first();
+			}
+		} 
+		if($page == "home"){
 		   $data['post_list'] = Blogs::where([['users_id' , '=' , Auth::user()->id]])->get();
 		} 
-	   if($page == "create_story"){
-	      $data['pageList'] = Page::where([['private_status' , '=' , NULL]])->get();
-	   }	
+		if($page == "create_story"){
+			$data['pageList'] = Page::where([['private_status' , '=' , NULL]])->get();
+		}	
+		if($page == "edit-url"){
+			if(!empty($p1)){
+				$data['pageContent'] = SeoModel::where([['id','=',$p1]])->get();
+				
+			}
+		}
 		  
 		if(!view()->exists("admin.$page"))
 			return view("404")->with($data);
@@ -98,9 +102,9 @@ class Dashboard extends Controller{
 		if($dir == "asc"){ $dir = "ASC"; }
 		else{ $dir = "DESC"; }
 		$order = $columns[$request->input('order.0.column')];
-		$postQuery = Blogs::where([['users_id','=',Auth::user()->id]]);
+		$postQuery = Blogs::where([['deleted_at','=',NULL],])->orderBy('id','DESC');
 		$totalRecord = $postQuery->count();
-		$posts = $postQuery->get();
+		$posts = $postQuery->skip($start)->take($limit)->get();
 		$partners_lists = [];
 		if($posts->count() > 0){
 			$i = 1;
@@ -111,7 +115,7 @@ class Dashboard extends Controller{
 				<i class="fas fa-edit"></i> 
 				</a>';	
 				$postArr = [];
-				$postArr['sn'] = $i;
+				$postArr['sn'] = $post->id;
 				$postArr['title'] = $post->title;
 				$postArr['action'] = $delete_btn.' '.$edit_btn." ".$change_credential;
 				$i++;

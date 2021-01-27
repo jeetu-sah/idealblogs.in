@@ -47,12 +47,11 @@
                 </div>
                 <div class="form-group">
                   <label>Select page </label>
+                  
                   <select class="form-control" name="pages_id" id="">
-                  <option value="">Select parent page</option>
-                    @foreach($pageList as $page)
-                    <option value="<?php echo $page->id; ?>"><?php echo $page->page_name; ?></option>
-                    @endforeach
-                  </select>
+                                                <option value="">Select parent page</option>
+                                                 {!! $pageList !!}
+                                              </select>
                 </div>
                 <div class="form-group">
                     <label>Title</label>
