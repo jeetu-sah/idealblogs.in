@@ -10,8 +10,7 @@ use sHelper;
 class Homecontroller extends Controller{
 	
    public function index($page = "home" , $p1 = NULL){
-	    
-		$data['pages_detail'] = Page::where([['page_slug','=', $page]])->first();
+	    $data['pages_detail'] = Page::where([['page_slug','=', $page]])->first();
 		$data['category'] = Page::where([['private_status' , '=', NULL]])->get();
 		if($page != "home"){
 		    if($data['pages_detail'] == NULL){ return redirect()->back(); }
@@ -45,7 +44,6 @@ class Homecontroller extends Controller{
 	
 
 	public function aboutUs(){
-		//echo "yes";exit;
 		$data['head_title'] = 'About Us | idealblogs.in';
 		return view("front.about")->with($data);
 	}
@@ -67,7 +65,6 @@ class Homecontroller extends Controller{
 	
 	
 	public function post($post_title){
-	     echo "Working";exit;
 	   if(empty($post_title)){ return redirect()->back(); } 
 	   $data['category'] = Page::where([['private_status' , '=', NULL]])->get();
 	   $data['post_detail'] = Blogs::where([['title_slug' , '=',$post_title]])->first();
@@ -79,9 +76,6 @@ class Homecontroller extends Controller{
 			     $data['imageUrl'] = $data['post_detail']->image_url;
 				$data['pageUrl'] = url("blogPost/$title_url");
 				$load_html_page = $data['post_detail']->id.'.html';
-				/*echo "<pre>";
-				print_r($load_html_page);exit;
-				exit;*/
 				$folder = public_path("pages/");
 				$data['pageLinked'] = $folder."/".$load_html_page;
 				if(!file_exists($data['pageLinked'])){
