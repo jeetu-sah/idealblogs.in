@@ -8,14 +8,7 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                   <i class="nav-icon far fa-circle text-info"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-            </ul>
+            
           </li>
           <li class="nav-item has-treeview">
             <a href="javascript::void()" class="nav-link">
@@ -62,19 +55,32 @@
                   <p>Add New Post</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="../charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
+              
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle text-info"></i>
-              <p>Informational</p>
+          <li class="nav-item has-treeview">
+            <a href="javascript::void()" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Seo Management
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="{{ url('dashboard/url-list') }}" class="nav-link">
+                   <i class="nav-icon far fa-circle text-info"></i>
+                  <p>Url List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('dashboard/add-url') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add New Url</p>
+                </a>
+              </li>
+              
+            </ul>
           </li>
         </ul>
       </nav>
