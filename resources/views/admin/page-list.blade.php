@@ -102,6 +102,17 @@ $(document).on('change','#roles',function(e){
    $('#user-list').DataTable().draw(true);
 });
 /*End*/
+$(document).on('click','.removePage',function(e){
+  var con = confirm('Are you sure want to delete this page !!!');
+  var pageID = $(this).data('pageid');
+  if(con == true){
+    url = baseUrl+"/dashboard/removePage/"+pageID;
+     window.location.href = url;
+  }
+   //e.preventDefault();
+   //$('#user-list').DataTable().draw(true);
+});
+/*End*/
 });
 </script>
 @endsection

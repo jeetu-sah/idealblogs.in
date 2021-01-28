@@ -39,6 +39,9 @@
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
+                      @if(Session::has('msg'))
+                        {!!  Session::get("msg") !!}
+                      @endif
                         <form action="<?php echo route("admin.savePage") ?>" method="post">
                                     @csrf
                                         <div class="form-group">
@@ -53,15 +56,7 @@
                                             <input type="text" name="page_name" id="page_name" class="form-control" required="required" placeholder="Page Name" value="{{ old('page_name') }}" />
                                         </div>
                                         <div class="form-group">
-                                            <label>Page title</label>
-                                            <textarea class="form-control" rows="5" placeholder="Title" name="page_title">{{ old('page_title') }}</textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Meta Keyword</label>
-                                            <textarea class="form-control" rows="5" placeholder="Meta Keyword" name="meta_keyword" >{{ old('meta_keyword') }}</textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Meta description</label>
+                                            <label>Description</label>
                                             <textarea class="form-control" rows="5" placeholder="Post Description" name="meta_description" >{{ old('meta_description') }}</textarea>
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-success">Save</button>

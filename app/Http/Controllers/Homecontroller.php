@@ -12,13 +12,12 @@ class Homecontroller extends Controller{
    public function index($page = "home" , $p1 = NULL){
 	    $data['pages_detail'] = Page::where([['page_slug','=', $page]])->first();
 		$data['category'] = Page::where([['private_status' , '=', NULL]])->get();
+		
 		if($page != "home"){
-		    if($data['pages_detail'] == NULL){ return redirect()->back(); }
 		   $data['posts'] = Blogs::where([['pages_id','=',$data['pages_detail']->id]])->orderBy('created_at' , 'DESC')->get();
-		   echo '';
+		   
 		  }
 		else{
-		    if($data['pages_detail'] == NULL){ return redirect()->back(); }
 		   $data['posts'] = Blogs::where([['type' , '=' , 1]])->orderBy('created_at' , 'DESC')->get(); 
 		  } 
 		   if($data['pages_detail'] != NULL){
@@ -68,6 +67,8 @@ class Homecontroller extends Controller{
 	   if(empty($post_title)){ return redirect()->back(); } 
 	   $data['category'] = Page::where([['private_status' , '=', NULL]])->get();
 	   $data['post_detail'] = Blogs::where([['title_slug' , '=',$post_title]])->first();
+	   //echo "<pre>";
+	   //print_r($post_title);exit;  
 	   if($data['post_detail'] != NULL){
 				$data['head_title'] = $data['post_detail']->title;	
 			    $data['description'] = $data['post_detail']->description;
