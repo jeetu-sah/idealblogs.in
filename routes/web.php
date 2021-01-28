@@ -24,7 +24,6 @@ Route::middleware(['web','isLoggedIn'])->group(function () {
 
 Route::middleware(['web','auth'])->group(function () {
     Route::get('dashboard/{pages?}/{p1?}' , "Dashboard@index");
-
     Route::name('seoManagement.')->group(function () {
         Route::post('saveUrl','SeoManagement@saveUrl')->name('saveUrl');
         Route::get('urlList','SeoManagement@urlList')->name('urlList');
@@ -47,10 +46,10 @@ Route::middleware(['web'])->group(function () {
     // Route::name('posts.')->group(function () {
     //     Route::post('uploadVideos','Post\PostController@uploadVideos')->name('uploadVideos');
     // });
-    Route::get('js_admin/admin', "Admin@pages");
-    Route::get('js_admin/{page?}/{p1?}', "Admin@index");
+    // Route::get('js_admin/admin', "Admin@pages");
+    // Route::get('js_admin/{page?}/{p1?}', "Admin@index");
     
-    Route::post('js_admin/{action}', "Admin@post_action");
+   // Route::post('js_admin/{action}', "Admin@post_action");
     Route::get('post/{page_title?}', "Homecontroller@post");
     Route::get('/{page?}', "Homecontroller@index");
     Route::get('logout' , "LoginController@logout");

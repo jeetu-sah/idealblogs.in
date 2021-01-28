@@ -12,7 +12,6 @@ use DB;
 class Dashboard extends Controller{
 	
    public function index($page = "home" , $p1 = NULL){
-	   //echo $page;exit;
 	   $data['title'] = "sayari , kavita , daily news , daily uses , motivational quotes , motivational ";
 	   	if($page == "add-page" || $page == "edit-page"){
 			$data['pageList'] = sHelper::parentPages();
@@ -37,6 +36,17 @@ class Dashboard extends Controller{
 			if(!empty($p1)){
 				$data['pageContent'] = SeoModel::where([['id','=',$p1]])->get();
 				
+			}
+		}
+		if($page == "removePage"){
+			if(!empty($p1)){
+				$pageDetail = Page::find($p1);
+				if($pageDetail != NULL){
+					$pageDetail->deleted_at=  now();
+					if($pageDetail->save()){
+						return redirect()->back()->with(['msg'=>'<p class="alert alert-success"><strong> Success , </strong>Delete successfully !!!. </p>']);
+					}
+				}
 			}
 		}
 		  
@@ -148,7 +158,8 @@ class Dashboard extends Controller{
 			$i = 1;
 			foreach($pages as $page){
 				$change_credential = NULL;	
-				$delete_btn =  "<a href='javascript::void()' data-partnerid='".$page->id."' data-toggle='tooltip' title='Add category' class='btn btn-danger remove_partner' style='margin-right: 5px;'><i class='fas fa-trash'></i></a>&nbsp;";
+				$delete_btn =  "<a href='javascript::void()' data-pageid='".$page->id."' data-toggle='tooltip' title='Add category' class='btn btn-danger removePage' style='margin-right: 5px;'><i class='fas fa-trash'></i></a>&nbsp;";
+
 				$edit_btn = '<a href="'.url("dashboard/edit-page/".$page->id).'" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
 				<i class="fas fa-edit"></i> 
 				</a>';	
@@ -190,25 +201,30 @@ class Dashboard extends Controller{
 				 fwrite($fh, $stringData);
 				 fclose($fh);
 			   }
-			 return redirect()->back()->with(['msg'=>'<div class="notice notice-success"><strong> Info , </strong> Post successfully upload  !!!. </div>']);
+			 return redirect()->back()->with(['msg'=>'<div class="alert alert-success"><strong> Info , </strong> Post successfully upload  !!!. </div>']);
 			}
 		  else{
-		      return redirect()->back()->with(['msg'=>'<div class="notice notice-danger"><strong> Wrong , </strong>  Something went wrong please try again  !!!. </div>']);
+		      return redirect()->back()->with(['msg'=>'<div class="alert alert-danger"><strong> Wrong , </strong>  Something went wrong please try again  !!!. </div>']);
 			 } 
 	}
 	/*End*/
 
 	public function savePage(Request $request){
 		$page_slug_name = sHelper::slug($request->page_name);
-		$save_response = DB::table('pages')->insert(['parent_id'=>$request->parent_id,'page_slug'=>$page_slug_name , 'page_title'=>$request->page_title , 'page_name'=>$request->page_name , 'priority'=>1 , 'status'=>'A' ,
-		'meta_key_word'=>$request->meta_keyword, 
-		'meta_description'=>$request->meta_description, 'created_at'=>date('Y-m-d H:i') , 'updated_at'=>date('Y-m-d H:i')]);
+		$save_response = Page::updateOrCreate(['page_slug'=>$page_slug_name],[
+												'parent_id'=>$request->parent_id,
+												'page_slug'=>$page_slug_name ,
+												'page_title'=>$request->page_title ,
+												'page_name'=>$request->page_name , 
+												'priority'=>1 , 'status'=>'A' ,
+												'meta_description'=>$request->meta_description]);
+
 		if($save_response){
-			return redirect()->back()->with(['msg'=>'<div class="notice notice-success">
+			return redirect()->back()->with(['msg'=>'<div class="alert alert-success">
 									<strong>Success </strong> Page create Successful !!!.</div>.']);
 		}
 		else{
-			return redirect()->back()->with(['msg'=>'<div class="notice notice-danger">
+			return redirect()->back()->with(['msg'=>'<div class="alert alert-danger">
 									<strong>Wrong </strong> Something went wrong , please try again  !!!.</div>.']);
 		}	
 	}	

@@ -31,7 +31,7 @@ class Blogs extends Model{
 	public static function save_post($request , $image_name = NULL){
 		$image_url = url("public/storage/$image_name");
 		//$slug_title = sHelper::slug($request->title);
-		$slug_title =  sHelper::makeHindiSlug($request->title);
+		$slug_title =  sHelper::slug($request->title);
 	    return Blogs::create(['users_id'=>Auth::user()->id,'pages_id'=>$request->pages_id,  'title_slug'=>$slug_title , 'title'=>$request->title, 
 		               'description'=>$request->description, 
 		               'image'=>$image_name , 
