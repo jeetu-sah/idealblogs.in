@@ -38,11 +38,15 @@
   gtag('config', 'G-P2PVSQP7PV');
 </script>
 <!--End--->
+<!-- font -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-green fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="<?php echo url("/") ?>">Blogs</a>
+      <a class="navbar-brand" href="<?php echo url("/") ?>">IdealBlogs</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -53,16 +57,46 @@
               <span class="sr-only">(current)</span>
             </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
             <a class="nav-link" href="{{ url('contact') }}">Tech</a>
           </li>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="#">Entertainment</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="#">Lifestyle</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url('/') }}">Education
+              <span class="sr-only">(current)</span>
+            </a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url('/') }}">Sports
+              <span class="sr-only">(current)</span>
+            </a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url('/') }}">Health and Care
+              <span class="sr-only">(current)</span>
+            </a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url('/') }}">Fashion and Beauty
+              <span class="sr-only">(current)</span>
+            </a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url('/') }}">Gaming
+              <span class="sr-only">(current)</span>
+            </a>
+            </li>
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ url('/') }}">Digital Marketing
+              <span class="sr-only">(current)</span>
+            </a>
+            </li>
         <!--/*  <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
           </li>*/-->
@@ -93,7 +127,8 @@
            
               <div class="col-md-4 col-xl-5" style="margin-top:20px;">
                 <div class="pr-xl-4">
-                  <p>We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.</p>
+                  <h3>About Us</h3>
+                  <p>IdealBlogs is a blogging website in which we provide such informative blogs on several topics such as Technology, Entertainment,  LifeStyle, Education, Sports, Health and care, Fashion and Beauty, Pet Care, Gaming, Digital Marketing etc.</p>
                   <!-- Rights-->
                   <p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Waves</span><span>. </span><span>All Rights Reserved.</span></p>
                 </div>
@@ -106,13 +141,15 @@
                 </dl>
                 <dl class="contact-list">
                   <dt>email:</dt>
-                  <dd><a href="mailto:#">dkstudioin@gmail.com</a></dd>
+                  <dd><a href="mailto:#">idealblogs@gmail.com</a></dd>
                 </dl>
-                <dl class="contact-list">
-                  <dt>phones:</dt>
-                  <dd><a href="tel:#">https://karosearch.com</a> <span>or</span> <a href="tel:#">https://karosearch.com</a>
-                  </dd>
-                </dl>
+                <h3>Connect With Us</h3>
+                <p>
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-instagram"></a>
+
+              </p>
               </div>
               <div class="col-md-4 col-xl-3 margintop20">
                 <h5>Links</h5>
@@ -122,18 +159,9 @@
                   <li><a href="{{ url('contact') }}">Contact Us</a></li>
                 </ul>
               </div>
-           
-          </div>
+         </div>
         </div>
-        <div class="row no-gutters social-container">
-          <div class="col"><a class="social-inner" href="#">
-            <span class="icon mdi mdi-facebook"></span><span>Facebook</span></a></div>
-          <div class="col"><a class="social-inner" href="#">
-            <span class="icon mdi mdi-instagram"></span><span>instagram</span></a></div>
-          <div class="col"><a class="social-inner" href="#">
-            <span class="icon mdi mdi-twitter"></span><span>twitter</span></a></div>
-          <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-youtube-play"></span><span>google</span></a></div>
-        </div>
+
       </footer>
   <script src="<?php echo url('public/front_webu/vendor/jquery/jquery.min.js'); ?>"></script>
   <script src="<?php echo url('public/front_webu/vendor/bootstrap/js/bootstrap.min.js') ?>">
