@@ -25,7 +25,7 @@
 	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 	<!--End-->
   <link href="{{ url('public/front_webu/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ url('public/front_webu/css/blog-home.css') }}" rel="stylesheet">
+  <link href="{{ url('public/front_webu/css/site.css') }}" rel="stylesheet">
   <link href="{{ url('public/css/custom.css') }}" rel="stylesheet">
  
   <script data-ad-client="ca-pub-4152597108794624" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -52,63 +52,27 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Home
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
+          @forelse ($headerNavs as $nav)
             <li class="nav-item active">
-            <a class="nav-link" href="{{ url('contact') }}">Tech</a>
+              <a class="nav-link" href="{{ url($nav->page_slug) }}">{{ $nav->page_name}}</a>
+            </li>
+          @empty
+            <li class="nav-item active">
+              <a class="nav-link" href="javascript::void();">No page </a>
+            </li>
+          @endforelse
           </li>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Entertainment</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Lifestyle</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Education
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
-            <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Sports
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
-            <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Health and Care
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
-            <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Fashion and Beauty
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
-            <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Gaming
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
-            <li class="nav-item active">
-            <a class="nav-link" href="{{ url('/') }}">Digital Marketing
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
-        <!--/*  <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>*/-->
           @if(Auth::check())
-          <li class="nav-item dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img style="height:30px;" src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avtar" alt="Avatar">&nbsp;&nbsp;{{ Auth::user()->name }} <b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><a href="<?php echo url('js_admin') ?>" class="dropdown-item"><i class="glyphicon glyphicon-user"></i> Dashboard</a></li>
-					<li class="divider dropdown-divider"></li>
-					<li><a href="<?php echo url('logout') ?>" class="dropdown-item"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
-				</ul>
-			</li>
+            <li class="nav-item dropdown">
+              <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img style="height:30px;" src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avtar" alt="Avatar">&nbsp;&nbsp;{{ Auth::user()->name }} 
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="<?php echo url('js_admin') ?>" class="dropdown-item"><i class="glyphicon glyphicon-user"></i> Dashboard</a></li>
+                <li class="divider dropdown-divider"></li>
+                <li><a href="<?php echo url('logout') ?>" class="dropdown-item"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+              </ul>
+            </li>
 		   @else
            <!--<li class="nav-item">
             <a class="nav-link" href="{{ url('login') }}">Login</a>
@@ -125,37 +89,39 @@
         <div class="container">
           <div class="row row-30 margintop20">
            
-              <div class="col-md-4 col-xl-5" style="margin-top:20px;">
+              <div class="col-md-4 col-xl-5 margintop20  margin-b-100">
                 <div class="pr-xl-4">
                   <h3>About Us</h3>
-                  <p>IdealBlogs is a blogging website in which we provide such informative blogs on several topics such as Technology, Entertainment,  LifeStyle, Education, Sports, Health and care, Fashion and Beauty, Pet Care, Gaming, Digital Marketing etc.</p>
+                  <p>IdealBlogs is a blogging website in which we provide such informative blogs on several topics such as Technology, Entertainment,  LifeStyle, Education, Sports, Health and care, Fashion and Beauty, Pet Care, Gaming, Digital Marketing etc. <span><a href=""><strong>Read More ...</strong></a></span></p>
                   <!-- Rights-->
-                  <p class="rights"><span>©  </span><span class="copyright-year">2018</span><span> </span><span>Waves</span><span>. </span><span>All Rights Reserved.</span></p>
+                  <p class="rights"><span>©  </span><span class="copyright-year">2021</span><span> </span><span>Waves</span><span>. </span>
+                    <span>All Rights Reserved by idealblogs.in .</span></p>
                 </div>
               </div>
-              <div class="col-md-4 margintop20">
-                <h5>Contacts</h5>
-                <dl class="contact-list">
+              <div class="col-md-4 margintop20 margin-b-100">
+                <h3>Contacts</h3>
+                {{-- <dl class="contact-list">
                   <dt>Address:</dt>
                   <dd>798 South Park Avenue, Jaipur, Raj</dd>
-                </dl>
+                </dl> --}}
                 <dl class="contact-list">
-                  <dt>email:</dt>
-                  <dd><a href="mailto:#">idealblogs@gmail.com</a></dd>
+                  <dt>Email: <a href="mailto:#">idealblogs@gmail.com</a></dt>
                 </dl>
-                <h3>Connect With Us</h3>
+                <h5>Connect With Us</h5>
                 <p>
-                <a href="#" class="fa fa-facebook"></a>
-                <a href="#" class="fa fa-twitter"></a>
-                <a href="#" class="fa fa-instagram"></a>
-
+                  <ul class="social-media-icon">
+                    <li><a href="#" class="fa fa-facebook"></a></li>
+                    <li><a href="#" class="fa fa-twitter"></a></li>
+                    <li><a href="#" class="fa fa-instagram"></a></li>
+                  </ul>
               </p>
               </div>
-              <div class="col-md-4 col-xl-3 margintop20">
-                <h5>Links</h5>
+              <div class="col-md-4 col-xl-3 margintop20 margin-b-100">
+                <h3>Important Links</h3>
                 <ul class="nav-list">
                   <li><a href="{{ url('about-us') }}">About</a></li>
                   <li><a href="{{ url('dmca-policy') }}">DMCA Policy</a></li>
+                  <li><a href="{{ url('privacy-policy') }}">Privacy Policy</a></li>
                   <li><a href="{{ url('contact') }}">Contact Us</a></li>
                 </ul>
               </div>

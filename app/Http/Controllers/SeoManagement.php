@@ -14,17 +14,18 @@ use DB;
 class SeoManagement extends Controller
 {
     public function saveUrl(){
+		
         $validatedData = request()->validate([
             'url' =>'required', 'title' =>'required',
             'meta_keyword'=>'required','meta_description'=>'required'
         ]);
-        $url = trim(request()->url);
+		$url = trim(request()->url);
         $response = SeoModel::updateOrcreate(['page_url'=>$url] ,
                                  [
-                                     'page_url'=>$url,
-                                     'title'=>request()->title,
-                                     'meta_keyword'=>request()->meta_keyword,
-                                     'meta_description'=>request()->meta_description
+                                    'page_url'=>$url,
+                                    'page_title'=>request()->title,
+                                    'meta_key_word'=>request()->meta_keyword,
+                                    'meta_description'=>request()->meta_description
                                  ]);
         if($response){
             return redirect()->back()->with(["msg"=>'<div class="notice notice-success">

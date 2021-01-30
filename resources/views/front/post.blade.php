@@ -19,7 +19,7 @@
           </div>
           <div class="card-footer text-muted">
              Posted on {{ date('M d Y' , strtotime($post_detail->created_at)) }} by
-            <a href="#">Anchit sharma</a>
+            <a href="#">Admin</a>
           </div>
         </div>
       </div>
