@@ -39,6 +39,18 @@
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
+                    @if(Session::has('msg'))
+                        {!!  Session::get("msg") !!}
+                    @endif
+                     @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                   <form action="<?php echo route("seoManagement.saveUrl") ?>" method="post" enctype="multipart/form-data">
                     @csrf
                 

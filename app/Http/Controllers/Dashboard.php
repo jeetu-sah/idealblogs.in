@@ -34,8 +34,8 @@ class Dashboard extends Controller{
 		}	
 		if($page == "edit-url"){
 			if(!empty($p1)){
-				$data['pageContent'] = SeoModel::where([['id','=',$p1]])->get();
-				
+				$data['pageContent'] = SeoModel::where([['id','=',$p1]])->first();
+					//echo $p1;exit;
 			}
 		}
 		if($page == "removePage"){
