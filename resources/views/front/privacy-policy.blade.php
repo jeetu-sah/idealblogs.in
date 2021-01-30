@@ -7,7 +7,7 @@
        
         <!-- Blog Post -->
         <div class="card mb-4">
-          <!--<img class="card-img-top" src="<?php echo url("public/image/about-post.jpg") ?>" alt="Card image cap">-->
+          <img class="card-img-top" src="<?php echo url("public/image/about-post.jpg") ?>" alt="Card image cap">
           <div class="card-body">
             <h1 class="card-title">Privacy Policy</h1>
             <p class="card-text">

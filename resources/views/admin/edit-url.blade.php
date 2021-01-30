@@ -39,9 +39,20 @@
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
-                  <form action="<?php echo route("seoManagement.saveUrl") ?>1" method="post" enctype="multipart/form-data">
+                  <form action="<?php echo route("seoManagement.saveUrl") ?>" method="post" enctype="multipart/form-data">
                     @csrf
-                
+                     @if(Session::has('msg'))
+                        {!!  Session::get("msg") !!}
+                    @endif
+                     @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <div class="form-group">
                         <label>Url </label>
                         <input type="text" name="url" id="url" class="form-control" required="required" placeholder="Url" value="{{ $pageContent->page_url ?? " " }}" />

@@ -7,7 +7,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>{{ $title ?? "idealblogs.in"}}</title>
-
+  <link rel="icon" type="image/png" href="{{ url('public/image/blog.png') }}">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('public/admin_webu/plugins/fontawesome-free/css/all.min.css') }}" />
   <!-- overlayScrollbars -->

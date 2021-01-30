@@ -37,7 +37,7 @@ class LoginController extends Controller{
 			if($user_response != NULL){
 			    $remember = $request->remember_me;
                 Auth::login($user_response , $remember);
-                return redirect('js_admin')->with(['msg'=>'<div class="notice notice-success"><strong> Success , </strong> Login Successful  !!! . </div>']);  
+                return redirect('dashboard/page-list')->with(['msg'=>'<div class="notice notice-success"><strong> Success , </strong> Login Successful  !!! . </div>']);  
 			   }
 			else{
 			    return redirect()->back()->with(['msg'=>'<div class="notice notice-danger"><strong> Wrong , </strong> Something went wrong , please try again  !!! . </div>']);
