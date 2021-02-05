@@ -24,11 +24,13 @@ Route::middleware(['web','isLoggedIn'])->group(function () {
 
 Route::middleware(['web','auth'])->group(function () {
     Route::get('dashboard/{pages?}/{p1?}' , "Dashboard@index");
+
     Route::name('seoManagement.')->group(function () {
         Route::post('saveUrl','SeoManagement@saveUrl')->name('saveUrl');
         Route::get('urlList','SeoManagement@urlList')->name('urlList');
     });
 
+    Route::get('admin/removePost/{postID}','Dashboard@removePost');
     Route::name('admin.')->group(function () {
         Route::get('postList','Dashboard@postList')->name('postList');
         Route::get('pageList','Dashboard@pageList')->name('pageList');
@@ -42,7 +44,9 @@ Route::middleware(['web'])->group(function () {
     Route::get('about-us','Homecontroller@aboutUs');
     Route::get('dmca-policy','Homecontroller@dmcaPolicy');
     Route::get('privacy-policy','Homecontroller@privacyPolicy');
+	Route::get('term-and-condition','Homecontroller@termAndCondition');
     Route::post('contact_send','Homecontroller@contact_send');
+	
     
     // Route::name('posts.')->group(function () {
     //     Route::post('uploadVideos','Post\PostController@uploadVideos')->name('uploadVideos');

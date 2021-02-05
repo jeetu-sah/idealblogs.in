@@ -19,24 +19,22 @@ class Homecontroller extends Controller{
 		   $data['meta_description'] = $seo_content->meta_description;
 		}
 		/*header nav start*/
-		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(5)->get();
+		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(10)->get();
 		/*end*/
 		//$data['posts'] = $data['category']  = collect();
 		$data['category'] = Page::where([['private_status' , '=', NULL]])->get();
-		$data['posts'] = Blogs::where([['type','=',1]])->orderBy('created_at' , 'DESC')->get(); 
+		$data['posts'] = Blogs::where([['type','=',1]])->orderBy('created_at','DESC')->get(); 
 			
 	
 
 		
-	    if($page == "contact" || $page == "privacy-policy" || $page == "happy-whatsapp-status" || $page == "term-and-condition"){
-		       $page = $page;
+	    if($page == "contact" || $page == "privacy-policy" || $page == "happy-whatsapp-status"){
+		    $page = $page;
 		  }	
 		else{
 		   $page = "index";	
 		  }  	
-		  
-		  
-
+	
 
 	    if(!view()->exists("front.$page"))
           return view("404")->with($data);
@@ -55,7 +53,7 @@ class Homecontroller extends Controller{
 		   $data['meta_description'] = $seo_content->meta_description;
 		}
 		/*header nav start*/
-		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(5)->get();
+		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(10)->get();
 		/*end*/
 		return view("front.about")->with($data);
 	}
@@ -70,7 +68,7 @@ class Homecontroller extends Controller{
 		   $data['meta_description'] = $seo_content->meta_description;
 		}
 		/*header nav start*/
-		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(5)->get();
+		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(10)->get();
 		/*end*/
 		return view("front.privacy-policy")->with($data);
 	}
@@ -85,9 +83,24 @@ class Homecontroller extends Controller{
 		   $data['meta_description'] = $seo_content->meta_description;
 		}
 		/*header nav start*/
-		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(5)->get();
+		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(10)->get();
 		/*end*/
 		return view("front.dmca-policy")->with($data);
+	}
+	
+	public function termAndCondition(){
+		$data['head_title'] = 'DMCA Policy | idealblogs.in';
+		$request_url = request()->fullUrl();
+	    $seo_content = DB::table('seo_content_tbl')->where([['page_url','=',(string)$request_url]])->first();
+	 	if($seo_content != NULL){
+		   $data['head_title'] = $seo_content->page_title;
+		   $data['meta_keyword'] = $seo_content->meta_key_word;
+		   $data['meta_description'] = $seo_content->meta_description;
+		}
+		/*header nav start*/
+		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(10)->get();
+		/*end*/
+		return view("front.term-and-condition")->with($data);
 	}
 	
 	public function contact_send(Request $request){
@@ -113,7 +126,7 @@ class Homecontroller extends Controller{
 		   $data['meta_description'] = $seo_content->meta_description;
 		}
 		/*header nav start*/
-		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(5)->get();
+		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(10)->get();
 		/*end*/
 	   if(empty($post_title)){ return redirect()->back(); } 
 	   $data['category'] = Page::where([['private_status' , '=', NULL]])->get();
@@ -121,7 +134,7 @@ class Homecontroller extends Controller{
 	   if($data['post_detail'] != NULL){
 				$image = $data['post_detail']->image;
 				$title_url = $data['post_detail']->title_url;
-			     $data['imageUrl'] = $data['post_detail']->image_url;
+			    $data['imageUrl'] = $data['post_detail']->image_url;
 				$data['pageUrl'] = url("blogPost/$title_url");
 				$load_html_page = $data['post_detail']->id.'.html';
 				$folder = public_path("pages/");
@@ -129,11 +142,6 @@ class Homecontroller extends Controller{
 				if(!file_exists($data['pageLinked'])){
 					$data['pageLinked'] = FALSE;
 				  }
-				/*page meta keyword*/
-				$data['meta_keyword'] = $data['post_detail']->meta_keyword;
-				$data['meta_description'] = $data['post_detail']->meta_description;
-				$data['meta_title'] = $data['post_detail']->meta_title;
-				/*End*/  
 			  }
 		if(!view()->exists("front.post"))
           return view("404")->with($data);

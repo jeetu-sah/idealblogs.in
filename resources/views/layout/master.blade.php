@@ -68,16 +68,12 @@
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="<?php echo url('js_admin') ?>" class="dropdown-item"><i class="glyphicon glyphicon-user"></i> Dashboard</a></li>
+                <li><a href="<?php echo url('dashboard/page-list') ?>" class="dropdown-item"><i class="glyphicon glyphicon-user"></i> Dashboard</a></li>
                 <li class="divider dropdown-divider"></li>
                 <li><a href="<?php echo url('logout') ?>" class="dropdown-item"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
               </ul>
             </li>
 		   @else
-           <!--<li class="nav-item">
-            <a class="nav-link" href="{{ url('login') }}">Login</a>
-          </li>-->
-            	
           @endif  
         </ul>
       </div>
@@ -122,6 +118,7 @@
                   <li><a href="{{ url('about-us') }}">About</a></li>
                   <li><a href="{{ url('dmca-policy') }}">DMCA Policy</a></li>
                   <li><a href="{{ url('privacy-policy') }}">Privacy Policy</a></li>
+                  <!--/*<li><a href="{{ url('term-and-condition') }}">Term and Condision</a></li>*/-->
                   <li><a href="{{ url('contact') }}">Contact Us</a></li>
                 </ul>
               </div>
