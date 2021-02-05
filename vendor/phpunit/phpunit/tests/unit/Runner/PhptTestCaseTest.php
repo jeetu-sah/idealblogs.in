@@ -154,7 +154,7 @@ EOF
 
     public function testShouldRunSkipifSectionWhenExists(): void
     {
-        $skipifSection = '' . \PHP_EOL;
+        $skipifSection = '<?php /** Nothing **/ ?>' . \PHP_EOL;
 
         $phptContent = self::EXPECT_CONTENT . \PHP_EOL;
         $phptContent .= '--SKIPIF--' . \PHP_EOL;

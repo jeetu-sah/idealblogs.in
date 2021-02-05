@@ -133,7 +133,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
                     $contents .= ' ?>';
                 }
 
-                $contents .= "";
+                $contents .= "<?php /**PATH {$this->getPath()} ENDPATH**/ ?>";
             }
 
             $this->files->put(

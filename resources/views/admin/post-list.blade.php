@@ -99,6 +99,17 @@ $(document).on('change','#roles',function(e){
    $('#user-list').DataTable().draw(true);
 });
 /*End*/
+
+$(document).on('click','.remove_post',function(e){
+  var con = confirm('Are you sure want to delete this post !!!');
+  var postid = $(this).data('postid');
+  if(con == true){
+    url = baseUrl+"/admin/removePost/"+postid;
+    window.location.href = url;
+  }
+   //e.preventDefault();
+   //$('#user-list').DataTable().draw(true);
+});
 });
 </script>
 @endsection

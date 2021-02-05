@@ -5,10 +5,9 @@
     <div class="row">
       <!-- Blog Entries Column -->
       <div class="col-md-8">
-       
         <!-- Blog Post -->
         <div class="card mb-4">
-          <img class="card-img-top" src="<?php echo url("public/image/about-post.jpg") ?>" alt="Card image cap">
+          <img class="card-img-top" src="<?php echo url("public/image/dmca-policy.jpg") ?>" alt="Card image cap">
           <div class="card-body">
             <h1 class="card-title">DMCA Policy</h1>
             <p class="card-text">idealblogs.in is in compliance with 17 U.S.C. and the Digital Millennium Copyright Act ("DMCA"). To respond to any type of infringement notices and actions taken by us regarding copyrighted content on other websites which comes under Digital Millennium Copyright Act ("DMCA") and other applicable intellectual property laws in a lawful way to preserve this DMCA policy.

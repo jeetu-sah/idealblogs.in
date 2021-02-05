@@ -68,7 +68,21 @@ class Dashboard extends Controller{
 	}
 	
 	
-	
+	public function removePost($postID){
+		if(!empty($postID)){
+			$blogdetail = Blogs::find($postID);
+			if($blogdetail != NULL){
+				$blogdetail->deleted_at = now();
+				if($blogdetail->save()){
+					return redirect()->back()->with(['msg'=>'<p class="alert alert-success"><strong> Success , </strong>Record Delete successfully  !!!. </p>']);
+				}else{
+					return redirect()->back()->with(['msg'=>'<p class="alert alert-danger"><strong> Wrong , </strong>Something went wrong , please try again   !!!. </p>']);
+				}
+			}
+		}else{
+			return redirect()->back()->with(['msg'=>'<p class="alert alert-danger"><strong> Wrong , </strong>Something went wrong , please try again   !!!. </p>']);
+		}
+	}
 
 	public function post($post_title){
 	   if(empty($post_title)){ return redirect()->back(); } 
@@ -120,7 +134,9 @@ class Dashboard extends Controller{
 			$i = 1;
 			foreach($posts as $post){
 				$change_credential = NULL;	
-				$delete_btn =  "<a href='javascript::void()' data-partnerid='".$post->id."' data-toggle='tooltip' title='Add category' class='btn btn-danger remove_partner' style='margin-right: 5px;'><i class='fas fa-trash'></i></a>&nbsp;";
+
+				$delete_btn =  "<a href='javascript::void()' data-postid='".$post->id."' data-toggle='tooltip' title='Delete ' class='btn btn-danger remove_post' style='margin-right: 5px;'><i class='fas fa-trash'></i></a>&nbsp;";
+				
 				$edit_btn = '<a href="'.url("dashboard/edit-post/".$post->id).'" data-toggle="tooltip" title="Edit Record" class="btn btn-primary" style="margin-right: 5px;">
 				<i class="fas fa-edit"></i> 
 				</a>';	
