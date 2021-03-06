@@ -59,7 +59,7 @@ class LoginController extends Controller{
         if(Hash::check($request->password , $user_details->password)){
                $remember = $request->remember_me;
                 Auth::login($user_details , $remember);
-                return redirect('js_admin')->with(['msg'=>'<div class="notice notice-success"><strong> Success , </strong> Login Successful  !!! . </div>']);    
+                return redirect('dashboard/page-list')->with(['msg'=>'<div class="notice notice-success"><strong> Success , </strong> Login Successful  !!! . </div>']);    
              }
            else{
               return redirect()->back()->with(['msg'=>'<div class="notice notice-danger"><strong> Wrong , </strong> Password does not matched !!! . </div>']); 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title><?php if(!empty($head_title)) echo $head_title;  ?></title>
-  <link rel="icon" type="image/png" href="{{ url('public/image/blog.png') }}">
+  <link rel="icon" type="image/png" href="{{asset('public/logo/fevicon.jpg')}}">
     <meta property="og:url"           content="{{ Request::url() }}" />
     <meta property="og:type"          content="article" />
     <meta property="og:title"         content="<?php if(!empty($head_title)) echo $head_title;  ?>" />
@@ -44,9 +44,19 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-green fixed-top">
+<div class="row" style="background-color:#06F; width:15px;">
+	
+</div>
+  <div class="container">
+    <div class="col-sm-12">
+      <img src="{{ url('public/logo/ideal-blog-logo.png') }}" class="img img-responsive" style="margin-top:-40px; margin-bottom:10px; height:70px;" />
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-green" id="headerNavigation">
     <div class="container">
-      <a class="navbar-brand" href="<?php echo url("/") ?>">IdealBlogs</a>
+      <a class="navbar-brand" href="<?php echo url("/") ?>">
+        <span class="fa fa-home fa-lg"></span>
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -54,7 +64,9 @@
         <ul class="navbar-nav ml-auto">
           @forelse ($headerNavs as $nav)
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url($nav->page_slug) }}">{{ $nav->page_name}}</a>
+              <a class="nav-link" href="{{ url("category/$nav->page_slug") }}"> 
+                {{ $nav->page_name}} 
+              </a>
             </li>
           @empty
             <li class="nav-item active">
@@ -79,12 +91,10 @@
       </div>
     </div>
   </nav>
-
   @yield('content')
   <footer class="section footer-classic context-dark bg-image bg-green">
         <div class="container">
           <div class="row row-30 margintop20">
-           
               <div class="col-md-4 col-xl-5 margintop20  margin-b-100">
                 <div class="pr-xl-4">
                   <h3>About Us</h3>
@@ -129,5 +139,19 @@
   <script src="<?php echo url('public/front_webu/vendor/jquery/jquery.min.js'); ?>"></script>
   <script src="<?php echo url('public/front_webu/vendor/bootstrap/js/bootstrap.min.js') ?>">
   </script>
+  <script>
+$(document).ready(function(e) {
+ $(window).scroll(function(){
+   var w_pos = $(document).scrollTop();
+   if( w_pos > 20){
+	    $(".w_pos").html(w_pos); 	 
+        $("#headerNavigation").show().addClass("fixed-top");
+	 }
+   else{
+	  $("#headerNavigation").removeClass("fixed-top"); 
+	 }	 
+ });   
+});
+</script>
 </body>
 </html>

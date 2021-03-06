@@ -25,6 +25,21 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+         <div class="row">
+          <!-- Left col -->
+          <div class="col-md-12">
+            <!-- MAP & BOX PANE -->
+            <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Filters</h3>
+                  </div>
+                  <div class="card-body">
+                    <input type="text" class="form-control" name="urlString" id="urlString" />
+                    <button style="margin-top: 10px;" type="button" class="btn btn-success" name="searchUrl" id="searchUrl">Search Url</button>
+                  </div>
+            </div>
+          </div>
+         </div>  
         <!-- Main row -->
         <div class="row">
           <!-- Left col -->
@@ -33,7 +48,6 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Post List</h3>
-
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -55,7 +69,7 @@
                   </table>
               </div>
             </div>
-        </div>
+          </div>
         </div>
         <!-- /.row -->
       </div><!--/. container-fluid -->
@@ -78,7 +92,7 @@ $('#user-list').DataTable({
 			 "dataType": "json",
 			 "type": "GET",
 			 "data":function(d){
-			    d.roles = $("#roles").val();
+			    d.searchUrl = $("#urlString").val();
 			 },
 		   },
 	"columns": [
@@ -94,8 +108,7 @@ $('#user-list').DataTable({
 
 
 /*roles on change*/	
-$(document).on('change','#roles',function(e){
-   e.preventDefault();
+$(document).on('click','#searchUrl',function(e){
    $('#user-list').DataTable().draw(true);
 });
 /*End*/

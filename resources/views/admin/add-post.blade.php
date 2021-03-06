@@ -39,7 +39,7 @@
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
-                  @if(Session::has('msg'))
+                      @if(Session::has('msg'))
                         {!!  Session::get("msg") !!}
                       @endif
                   <form action="<?php echo route("admin.savePost") ?>" method="post" enctype="multipart/form-data">

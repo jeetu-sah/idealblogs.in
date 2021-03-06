@@ -3,17 +3,21 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use sHelper;
 use Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blogs extends Model{
+	
+	use SoftDeletes;
    
     protected $table =  "blogs";
-     protected $fillable = ['id' , 'users_id', 'pages_slug_name', 'pages_id', 'title_slug',  'title','description' ,  'image'  , 'image_url' , 'page_title' , 'meta_keyword' , 'meta_description', 'deleted_at' , 'created_at' , 'updated_at','type'
+    protected $fillable = ['id' , 'users_id', 'pages_slug_name', 'pages_id', 'title_slug',  'title','description' ,  'image'  , 'image_url' , 'page_title' , 'meta_keyword' , 'meta_description', 'deleted_at' , 'created_at' , 'updated_at','type'
     ];
     
+	
     
     public static function edit_post($request , $image_name = NULL){
 		$image_url = url("public/storage/$image_name");
-		$slug_title = sHelper::makeHindiSlug($request->title);
+		$slug_title = sHelper::slug($request->title);
 	    return Blogs::where([['id' , '=', $request->editid]])
 		             ->update(['users_id'=>Auth::user()->id,
 		               'pages_id'=>$request->pages_id,  

@@ -58,3 +58,6 @@ ul, ol {
   visibility: hidden;
   transition: .22s ease;
 }
+.fontBigSize{
+  font-size: 36px;
+}
