@@ -12,8 +12,9 @@ class Homecontroller extends Controller{
 	
    public function index($page = "home" , $p1 = NULL){
 	   $request_url = request()->fullUrl();
+	   $data['head_title'] = $data['meta_keyword'] = $data['meta_description']  = NULL;
 	   $seo_content = DB::table('seo_content_tbl')->where([['page_url','=',(string)$request_url]])->first();
-	 	if($seo_content != NULL){
+	   if($seo_content != NULL){
 		   $data['head_title'] = $seo_content->page_title;
 		   $data['meta_keyword'] = $seo_content->meta_key_word;
 		   $data['meta_description'] = $seo_content->meta_description;
@@ -23,23 +24,45 @@ class Homecontroller extends Controller{
 		/*end*/
 		//$data['posts'] = $data['category']  = collect();
 		$data['category'] = Page::where([['private_status' , '=', NULL]])->get();
-		$data['posts'] = Blogs::where([['type','=',1]])->orderBy('created_at','DESC')->get(); 
-			
-	
-
-		
+		$data['posts'] = Blogs::where([['type','=',1]])->orderBy('created_at','DESC')->get(); 	
 	    if($page == "contact" || $page == "privacy-policy" || $page == "happy-whatsapp-status"){
 		    $page = $page;
-		  }	
-		else{
+		}else{
 		   $page = "index";	
-		  }  	
+		}  	
 	
 
 	    if(!view()->exists("front.$page"))
           return view("404")->with($data);
         else  
          return view("front.$page")->with($data);
+	}
+
+	public function category($page = "education" , $p1 = NULL){
+		$data['posts'] = collect();
+		$request_url = request()->fullUrl();
+		$data['head_title'] = $data['meta_keyword'] = $data['meta_description']  = NULL;
+		$seo_content = DB::table('seo_content_tbl')->where([['page_url','=',(string)$request_url]])->first();
+		if($seo_content != NULL){
+			$data['head_title'] = $seo_content->page_title;
+			$data['meta_keyword'] = $seo_content->meta_key_word;
+			$data['meta_description'] = $seo_content->meta_description;
+		}
+		/*find view post */
+		$pages = DB::table('pages')->where([['page_slug','=',(string)$page]])->first();
+		if($pages != NULL){
+			$data['posts'] = Blogs::where([['pages_id','=',$pages->id]])->orderBy('created_at','DESC')->get(); 	
+		}
+		$data['category'] = Page::where([['private_status' , '=', NULL]])->get();
+		/*header nav start*/
+		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(10)->get();
+		/*end*/
+		/*end*/
+
+		if(!view()->exists("front.index"))
+          return view("404")->with($data);
+        else  
+         return view("front.index")->with($data);
 	}
 	
 
@@ -115,16 +138,16 @@ class Homecontroller extends Controller{
 	
 	
 	public function post($post_title){
+		$data = [];
+		$data['head_title'] = $data['meta_keyword'] = $data['meta_description'] =NULL;
 		$request_url = request()->fullUrl();
 		$seo_content = DB::table('seo_content_tbl')->where([['page_url','=',$request_url]])->first();
-			// echo "<pre>";
-			// print_r($seo_content);
-			// ;exit; 
 		if($seo_content != NULL){
 		   $data['head_title'] = $seo_content->page_title;
 		   $data['meta_keyword'] = $seo_content->meta_key_word;
 		   $data['meta_description'] = $seo_content->meta_description;
 		}
+		// echo $data['head_title']."<br />".$data['meta_keyword']."<br />".$data['meta_description'];exit;
 		/*header nav start*/
 		$data['headerNavs'] = Page::where([['parent_id','=',NULL]])->select('page_name','page_slug')->take(10)->get();
 		/*end*/

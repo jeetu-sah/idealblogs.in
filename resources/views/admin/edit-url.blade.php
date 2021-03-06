@@ -39,7 +39,7 @@
               </div>
               <!-- /.card-header -->
                 <div class="card-body">
-                  <form action="<?php echo route("seoManagement.saveUrl") ?>" method="post" enctype="multipart/form-data">
+                  <form action="<?php echo route("seoManagement.editSeoManage") ?>" method="post" enctype="multipart/form-data">
                     @csrf
                      @if(Session::has('msg'))
                         {!!  Session::get("msg") !!}
@@ -55,16 +55,17 @@
                     @endif
                     <div class="form-group">
                         <label>Url </label>
+                        <input type="hidden" name="editid" id="editid" class="form-control" required="required" placeholder="Url" value="{{ $pageContent->id ?? " " }}" readonly/>
                         <input type="text" name="url" id="url" class="form-control" required="required" placeholder="Url" value="{{ $pageContent->page_url ?? " " }}" />
                     </div>
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" name="title" id="title" class="form-control" required="required" placeholder="Title" value="{{ $pageContent->page_title ?? " " }}" />
                     </div>
-                <div class="form-group">
-                    <label>Meta Keyword</label>
-                    <textarea class="form-control" rows="5" placeholder="Meta Keyword" name="meta_keyword" >{{ $pageContent->meta_key_word ?? " " }}</textarea>
-                </div>
+                  <div class="form-group">
+                      <label>Meta Keyword</label>
+                      <textarea class="form-control" rows="5" placeholder="Meta Keyword" name="meta_keyword" >{{ $pageContent->meta_key_word ?? " " }}</textarea>
+                  </div>
                 <div class="form-group">
                     <label>Meta description</label>
                     <textarea class="form-control" rows="5" placeholder="Meta Description" name="meta_description" >{{ $pageContent->meta_description ?? " " }}</textarea>

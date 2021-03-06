@@ -197,6 +197,18 @@ class Dashboard extends Controller{
         return json_encode($json_data); exit;
 	}
 
+	//Edit post
+	public function editPost(Request $request){
+		$image_name = $this->upload_single_file($request);
+		$save_response = Blogs::edit_post($request, $image_name);
+		if($save_response != FALSE){
+			return redirect()->back()->with(['msg'=>'<div class="notice notice-success"><strong> Info , </strong> Post successfully upload  !!!. </div>']);
+		}
+		else{
+			return redirect()->back()->with(['msg'=>'<div class="notice notice-danger"><strong> Wrong , </strong>  Something went wrong please try again  !!!. </div>']);
+		} 
+	}
+
 	/*save post */
 	public function savePost(Request $request){
 		$image_name = NULL;

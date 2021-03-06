@@ -77,16 +77,14 @@ class Admin extends Controller{
 		}	
 	    /*Edit post*/
 	  if($action == "edit_post"){
-		 $image_name = $this->upload_single_file($request);
-		 $save_response = Blogs::edit_post($request, $image_name);
-		  if($save_response != FALSE){
-			 return redirect()->back()->with(['msg'=>'<div class="notice notice-success"><strong> Info , </strong> Post successfully upload  !!!. </div>']);
-			}
-		  else{
-		      return redirect()->back()->with(['msg'=>'<div class="notice notice-danger"><strong> Wrong , </strong>  Something went wrong please try again  !!!. </div>']);
-			 } 
-		
-		  
+		//  $image_name = $this->upload_single_file($request);
+		//  $save_response = Blogs::edit_post($request, $image_name);
+		//   if($save_response != FALSE){
+		// 	 return redirect()->back()->with(['msg'=>'<div class="notice notice-success"><strong> Info , </strong> Post successfully upload  !!!. </div>']);
+		// 	}
+		//   else{
+		//       return redirect()->back()->with(['msg'=>'<div class="notice notice-danger"><strong> Wrong , </strong>  Something went wrong please try again  !!!. </div>']);
+		// 	 } 
 		 }
 	  /*End*/	
 
