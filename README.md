@@ -15,6 +15,10 @@ Idealblogs is a Open Source Blog post website with Laravel + HTML + Bootstrap. T
 2. OpenSSL PHP Extension
 3. PDO PHP Extension
 
+## Install
+    ### Clone the source code or create new project.
+    
+    https://github.com/jeetu-sah/idealblogs.in.git
 
 ## DEMO
 DEMO: IdealBlogs  (https://idealblogs.in)  <br />
@@ -22,6 +26,8 @@ Admin Login: Admin Login ( https://idealblogs.in/login )
 #### Admin Credential. 
 login_id: 8423292048  <br />
 password: @Admin@123#
+
+
 
 ## Donate
 Support my Goodwork by being sponsors and backers.
