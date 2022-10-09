@@ -6,7 +6,8 @@ Idealblogs is a Open Source Blog post website with Laravel + HTML + Bootstrap. T
 1. Dynamic Page - Create, List, Edit, Delete
    Create Pages, In parent and Child Format 
 2. Manage Post - Create, List, Edit, Delete
-3. Manage SEO (Search engine optimiation)
+3. Categorize articles
+4. Manage SEO (Search engine optimiation)
 
 
 ## Requirement
