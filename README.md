@@ -24,4 +24,10 @@ login_id: 8423292048  <br />
 password: @Admin@123#
 
 
+## License
+
+The project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
 
