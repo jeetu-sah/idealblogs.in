@@ -23,6 +23,9 @@ Admin Login: Admin Login ( https://idealblogs.in/login )
 login_id: 8423292048  <br />
 password: @Admin@123#
 
+## Donate
+Support my Goodwork by being sponsors and backers.
+Paypal: https://www.paypal.com/paypalme/jeetu226
 
 ## License
 
