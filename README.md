@@ -1,6 +1,6 @@
 # idealblogs.in
 
-Idealblogs is a Open Source Blog post website with Laravel + HTML + Bootstrap. This is SEO  friendly blog built application
+Idealblogs is a Open Source Blog post website with Laravel 7 + HTML + Bootstrap. This is SEO  friendly blog built application
 
 ### Basic Features
 1. Dynamic Page - Create, List, Edit, Delete
